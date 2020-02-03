@@ -12,7 +12,6 @@ test('Calling fizzbuzz with `5` prints out 5 statements', () => {
 
 test('Calling fizzbuzz with 15 prints out the correct values', () => {
   fizzBuzz(15);
-
   expect(console.log.mock.calls[0][0]).toEqual(1);
   expect(console.log.mock.calls[1][0]).toEqual(2);
   expect(console.log.mock.calls[2][0]).toEqual('fizz');

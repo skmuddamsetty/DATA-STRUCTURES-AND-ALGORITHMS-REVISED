@@ -9,10 +9,25 @@
 //   reverseInt(-90) === -9
 
 function reverseInt(n) {
-  let abcd = '';
-  let test = 123;
+  const reversed = n
+    .toString()
+    .split('')
+    .reverse()
+    .join('');
+  return parseInt(reversed) * Math.sign(n);
 }
 
-reverseInt(123);
+function reverseInt_sol_1(n) {
+  let reversed = 0;
+  let num = Math.abs(n);
+  while (num !== 0) {
+    const lastNum = num % 10;
+    reversed = reversed * 10 + lastNum;
+    num = Math.floor(num / 10);
+  }
+  return reversed * Math.sign(n);
+}
 
-module.exports = reverseInt;
+reverseInt_sol_1(123);
+
+module.exports = { reverseInt, reverseInt_sol_1 };

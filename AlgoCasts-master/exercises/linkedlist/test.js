@@ -10,7 +10,7 @@ test('Node is a class', () => {
   expect(typeof Node.prototype.constructor).toEqual('function');
 });
 
-describe.skip('A Node', () => {
+describe('A Node', () => {
   test('has properties "data" and "next"', () => {
     const node = new Node('a', 'b');
     expect(node.data).toEqual('a');
@@ -18,7 +18,7 @@ describe.skip('A Node', () => {
   });
 });
 
-describe.skip('Insert First', () => {
+describe('Insert First', () => {
   test('appends a node to the start of the list', () => {
     const l = new List();
     l.insertFirst(1);
@@ -28,7 +28,17 @@ describe.skip('Insert First', () => {
   });
 });
 
-describe.skip('Size', () => {
+describe('Insert First Solution 1', () => {
+  test('appends a node to the start of the list', () => {
+    const l = new List();
+    l.insertFirst_sol_1(1);
+    expect(l.head.data).toEqual(1);
+    l.insertFirst_sol_1(2);
+    expect(l.head.data).toEqual(2);
+  });
+});
+
+describe('Size', () => {
   test('returns the number of items in the linked list', () => {
     const l = new List();
     expect(l.size()).toEqual(0);
@@ -40,7 +50,7 @@ describe.skip('Size', () => {
   });
 });
 
-describe.skip('GetFirst', () => {
+describe('GetFirst', () => {
   test('returns the first element', () => {
     const l = new List();
     l.insertFirst(1);
@@ -50,9 +60,10 @@ describe.skip('GetFirst', () => {
   });
 });
 
-describe.skip('GetLast', () => {
+describe('GetLast', () => {
   test('returns the last element', () => {
     const l = new List();
+    expect(l.getLast()).toEqual(null);
     l.insertFirst(2);
     expect(l.getLast()).toEqual({ data: 2, next: null });
     l.insertFirst(1);
@@ -60,7 +71,7 @@ describe.skip('GetLast', () => {
   });
 });
 
-describe.skip('Clear', () => {
+describe('Clear', () => {
   test('empties out the list', () => {
     const l = new List();
     expect(l.size()).toEqual(0);
@@ -74,9 +85,11 @@ describe.skip('Clear', () => {
   });
 });
 
-describe.skip('RemoveFirst', () => {
+describe('RemoveFirst', () => {
   test('removes the first node when the list has a size of one', () => {
     const l = new List();
+    l.removeFirst();
+    expect(l.size()).toEqual(0);
     l.insertFirst('a');
     l.removeFirst();
     expect(l.size()).toEqual(0);
@@ -97,7 +110,7 @@ describe.skip('RemoveFirst', () => {
   });
 });
 
-describe.skip('RemoveLast', () => {
+describe('RemoveLast', () => {
   test('RemoveLast removes the last node when list is empty', () => {
     const l = new List();
     expect(() => {
@@ -135,19 +148,56 @@ describe.skip('RemoveLast', () => {
   });
 });
 
-describe.skip('InsertLast', () => {
+describe('InsertLast', () => {
   test('adds to the end of the list', () => {
     const l = new List();
+    l.insertLast('c');
+
     l.insertFirst('a');
 
     l.insertLast('b');
 
-    expect(l.size()).toEqual(2);
+    expect(l.size()).toEqual(3);
     expect(l.getLast().data).toEqual('b');
+    expect(l.getFirst().data).toEqual('a');
   });
 });
 
-describe.skip('GetAt', () => {
+describe('insertLast_using_getLast', () => {
+  test('adds to the end of the list', () => {
+    const l = new List();
+    l.insertLast_using_getLast('c');
+
+    l.insertFirst('a');
+
+    l.insertLast_using_getLast('b');
+
+    expect(l.size()).toEqual(3);
+    expect(l.getLast().data).toEqual('b');
+    expect(l.getFirst().data).toEqual('a');
+  });
+});
+
+describe('getAt_using_size', () => {
+  test('returns the node at given index', () => {
+    const l = new List();
+    expect(l.getAt_using_size(10)).toEqual(null);
+
+    l.insertLast(1);
+    l.insertLast(2);
+    l.insertLast(3);
+    l.insertLast(4);
+
+    expect(l.getAt_using_size(0).data).toEqual(1);
+    expect(l.getAt_using_size(1).data).toEqual(2);
+    expect(l.getAt_using_size(2).data).toEqual(3);
+    expect(l.getAt_using_size(3).data).toEqual(4);
+    expect(l.getAt_using_size(-1)).toEqual(null);
+    expect(l.getAt_using_size(100)).toEqual(null);
+  });
+});
+
+describe('GetAt', () => {
   test('returns the node at given index', () => {
     const l = new List();
     expect(l.getAt(10)).toEqual(null);
@@ -161,10 +211,12 @@ describe.skip('GetAt', () => {
     expect(l.getAt(1).data).toEqual(2);
     expect(l.getAt(2).data).toEqual(3);
     expect(l.getAt(3).data).toEqual(4);
+    expect(l.getAt(-1)).toEqual(null);
+    expect(l.getAt(100)).toEqual(null);
   });
 });
 
-describe.skip('RemoveAt', () => {
+describe('RemoveAt', () => {
   test('removeAt doesnt crash on an empty list', () => {
     const l = new List();
     expect(() => {
