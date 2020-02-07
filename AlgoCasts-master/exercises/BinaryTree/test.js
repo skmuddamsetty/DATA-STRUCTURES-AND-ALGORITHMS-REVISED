@@ -50,6 +50,21 @@ test('Print the PostOrder Array of the Binary Tree', () => {
   expect(console.log.mock.calls[8][0]).toEqual(2);
 });
 
+test('Sum of all nodes in the binary tree', () => {
+  let sum = bt.getSumOfAllNodes(bt.root);
+  expect(sum).toEqual(62);
+});
+
+test('Number of nodes in the binary tree', () => {
+  let numOfNodes = bt.getNumberOfNodes(bt.root);
+  expect(numOfNodes).toEqual(9);
+});
+
+test('Number of nodes in the binary tree', () => {
+  let numOfLeafNodes = bt.getNumberOfLeafNodes(bt.root);
+  expect(numOfLeafNodes).toEqual(4);
+});
+
 beforeEach(() => {
   /**
    *                           2

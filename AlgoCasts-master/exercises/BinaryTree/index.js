@@ -43,6 +43,46 @@ class BinaryTree {
     // process the current node last
     console.log(root.key);
   }
+
+  getSumOfAllNodes(root) {
+    // base case
+    if (!root) {
+      return 0;
+    }
+    // recursively calling the getSumOfAllNodes with left and right nodes
+    return (
+      root.key +
+      this.getSumOfAllNodes(root.left) +
+      this.getSumOfAllNodes(root.right)
+    );
+  }
+
+  getNumberOfNodes(root) {
+    // base case
+    if (!root) {
+      return 0;
+    }
+    // recursively calling the getNumberOfNodes with left and right nodes
+    return (
+      1 + this.getNumberOfNodes(root.left) + this.getNumberOfNodes(root.right)
+    );
+  }
+
+  getNumberOfLeafNodes(root) {
+    // base case
+    if (!root) {
+      return 0;
+    }
+    // if there is no left node or right node
+    if (!root.left && !root.right) {
+      return 1;
+    }
+    // recursively calling the getNumberOfLeafNodes with left and right nodes
+    return (
+      this.getNumberOfLeafNodes(root.left) +
+      this.getNumberOfLeafNodes(root.right)
+    );
+  }
 }
 
 module.exports = { BinaryTree, Node };
