@@ -83,6 +83,68 @@ class BinaryTree {
       this.getNumberOfLeafNodes(root.right)
     );
   }
+
+  /*
+    Calculate height of binary tree | Iterative & Recursive
+    
+    Write an efficient algorithm to compute the height of binary tree. The height or depth of a tree is number of edges or nodes on longest path from root node to leaf node.
+
+    
+    The program should consider number of nodes in the longest path. For example, height of an empty tree is 0 and height of tree with only one node is 1.
+
+    
+
+    The idea is to traverse the tree in post-order fashion and calculate the height of left and right subtree. The height of the subtree rooted at any node will be equal to maximum height of its left and right subtree plus one. We recursively apply this property to all tree nodes in bottom-up manner (post-order fashion) and return maximum height of the subtree rooted at that node.
+
+    Iterative solution –
+ 
+    In iterative version, we perform level order traversal of the tree. The height of the tree is equal to number of levels in the tree.
+  */
+
+  heightOfBinaryTree_recursive(root) {
+    // Base case: empty tree has height 0
+    if (!root) {
+      return 0;
+    }
+    // recur for left and right subtree and consider maximum depth
+    return (
+      1 +
+      Math.max(
+        this.heightOfBinaryTree_recursive(root.left),
+        this.heightOfBinaryTree_recursive(root.right)
+      )
+    );
+  }
+
+  // Print elements at given level in Binary Tree
+  printElementsAtGivenLevel_Recursive(root, level) {
+    if (!root) {
+      return;
+    }
+    if (level === 1) {
+      console.log(root.key);
+    }
+    this.printElementsAtGivenLevel_Recursive(root.left, level - 1);
+    this.printElementsAtGivenLevel_Recursive(root.right, level - 1);
+  }
+
+  // Print elements in Level order (Using Recursion)
+  printElementsInLevelOrder_recursive(root) {
+    const height = this.heightOfBinaryTree_recursive(root);
+    for (let i = 0; i <= height; i++) {
+      this.printElementsAtGivenLevel_Recursive(root, i + 1);
+    }
+  }
 }
 
+let bt = new BinaryTree();
+let root = new Node(2);
+root.left = new Node(7);
+root.right = new Node(10);
+root.left.left = new Node(8);
+root.left.right = new Node(6);
+root.left.right.left = new Node(5);
+root.left.right.right = new Node(11);
+root.right.right = new Node(9);
+root.right.right.left = new Node(4);
 module.exports = { BinaryTree, Node };
