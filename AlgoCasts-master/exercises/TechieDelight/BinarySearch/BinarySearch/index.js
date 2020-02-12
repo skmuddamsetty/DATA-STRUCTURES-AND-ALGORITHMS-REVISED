@@ -94,5 +94,4 @@ var search_recursive = function(
   }
 };
 
-search_recursive([2, 3, 5, 7, 8, 10, 12, 15, 18, 20], 7);
 module.exports = { search_iterative, search_recursive };
