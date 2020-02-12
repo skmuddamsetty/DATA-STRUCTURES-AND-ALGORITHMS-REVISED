@@ -43,8 +43,56 @@
     Case 3: target > A[mid], we discard all elements in the left search space including the mid element i.e. A[low..mid]. Now our new low would be mid + 1.
     
 
-    We repeat the process until target is found or our search space is exhausted. Let’s understand this by taking an example. Let
-
-    arr = [2, 3, 5, 7, 8, 10, 12, 15, 18, 20]
-    target = 7
+    We repeat the process until target is found or our search space is exhausted.
 */
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search_iterative = function(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  let mid;
+  while (left <= right) {
+    mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      return mid;
+    }
+    if (nums[mid] > target) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return -1;
+};
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search_recursive = function(
+  nums,
+  target,
+  left = 0,
+  right = nums.length - 1
+) {
+  if (left > right) {
+    return -1;
+  }
+  let mid = Math.floor((left + right) / 2);
+  if (nums[mid] === target) {
+    return mid;
+  }
+  if (nums[mid] > target) {
+    return search_recursive(nums, target, left, mid - 1);
+  } else {
+    return search_recursive(nums, target, mid + 1, right);
+  }
+};
+
+search_recursive([2, 3, 5, 7, 8, 10, 12, 15, 18, 20], 7);
+module.exports = { search_iterative, search_recursive };
