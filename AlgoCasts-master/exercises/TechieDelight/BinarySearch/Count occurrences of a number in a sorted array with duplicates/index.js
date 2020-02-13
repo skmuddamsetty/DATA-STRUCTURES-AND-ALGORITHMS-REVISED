@@ -27,3 +27,49 @@
 
     We can easily solve this problem in O(log(n)) time by modifying binary search algorithm. The idea is to find the index of first and last occurrence of given number and return the difference between two indices + 1. We have already discuss how to find first and last occurrence of given number in O(log(n)) time in previous post.
 */
+
+var firstOccurence = function(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  let mid;
+  let result = -1;
+  while (left <= right) {
+    mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      result = mid;
+      right = mid - 1;
+    } else if (nums[mid] > target) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return result;
+};
+
+var lastOccurence = function(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  let mid;
+  let result = -1;
+  while (left <= right) {
+    mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      result = mid;
+      left = mid + 1;
+    } else if (nums[mid] > target) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return result;
+};
+
+var countOccurences = function(nums, target) {
+  let firstIndex = firstOccurence(nums, target);
+  let lastIndex = lastOccurence(nums, target);
+  return lastIndex - firstIndex + 1;
+};
+
+module.exports = countOccurences;
